@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use Hidehalo\Nanoid\Client;
+use Hidehalo\Nanoid\GeneratorInterface;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -32,8 +34,13 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
+        $client = new Client();
+        $nanoid = $client->generateId($size = 21, $mode = Client::MODE_DYNAMIC);
+
         return User::create([
+            '__id' => $nanoid,
             'name' => $input['name'],
+            'avatar' => $input['avatar'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
