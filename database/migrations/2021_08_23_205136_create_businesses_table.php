@@ -22,8 +22,8 @@ class CreateBusinessesTable extends Migration
             $table->string('city', 100);
             $table->string('state', 100);
             $table->string('postal_code', 10)->nullable();
-            $table->decimal('latitude', 8, 6);
-            $table->decimal('longitude', 9, 6);
+            $table->decimal('latitude', 11, 9);
+            $table->decimal('longitude', 12, 9);
             $table->string('location', 150);
             $table->string('geohash', 20)->nullable();
             $table->string('telephone_number', 20)->nullable();
