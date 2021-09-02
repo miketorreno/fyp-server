@@ -7,10 +7,14 @@ scalar DateTime
 
 type Query {
     businesses: [Business!]! @paginate(defaultCount: 10)
-    business(id: ID @eq): Business @find
+    business(__id: String @eq): Business @find
+    # business(id: ID @eq): Business @find
 
     categories: [Category!]! @paginate(defaultCount: 10)
     category(id: ID @eq): Category @find
+
+    reviews: [Review!]! @paginate(defaultCount: 10)
+    review(id: ID @eq): Review @find
 
     users: [User!]! @paginate(defaultCount: 10)
     user(id: ID @eq): User @find
@@ -87,6 +91,24 @@ type Mutation {
     ): Category @update
     deleteCategory(id: ID!): Category @delete
 
+    # REVIEWS
+    createReview(
+        __id: String
+        business_id: Int!
+        user_id: Int!
+        rating: Int!
+        review: String!
+    ): Review! @create
+    updateReview(
+        id: ID!
+        business_id: String
+        user_id: String
+        rating: Int
+        review: String
+        edited: Int
+    ): Review @update
+    deleteReview(id: ID!): Review @delete
+
     # USERS
     createUser(
         __id: String
@@ -129,6 +151,7 @@ type Business {
     updated_at: DateTime
     deleted_at: DateTime
     category: Category! @belongsTo
+    reviews: [Review!]! @hasMany
 }
 
 type Category {
@@ -140,6 +163,21 @@ type Category {
     updated_at: DateTime
     deleted_at: DateTime
     businesses: [Business!]! @hasMany
+}
+
+type Review {
+    id: ID!
+    __id: String!
+    business_id: Int!
+    user_id: Int!
+    rating: Int!
+    review: String!
+    edited: Int!
+    created_at: DateTime
+    updated_at: DateTime
+    deleted_at: DateTime
+    business: Business! @belongsTo
+    user: User! @belongsTo
 }
 
 type User {

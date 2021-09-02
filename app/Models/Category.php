@@ -23,7 +23,7 @@ class Category extends Model
     protected static function boot()
     {
         parent::boot();
-        Category::saving(function ($model) {
+        Category::creating(function ($model) {
             $client = new Client();
             $nanoid = $client->generateId($size = 21, $mode = Client::MODE_DYNAMIC);
             $model->__id = $nanoid;
