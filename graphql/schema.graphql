@@ -7,10 +7,13 @@ scalar DateTime
 
 type Query {
     businesses: [Business!]! @paginate(defaultCount: 10)
-    business(__id: String @eq): Business @find
     # business(id: ID @eq): Business @find
+    business(__id: String @eq): Business @find
+    # businessSearch(search: String @search): [Business!]! @paginate(defaultCount: 10)
+    businessSearch(search: String @search): [Business!]! @all
 
-    categories: [Category!]! @paginate(defaultCount: 10)
+    # categories: [Category!]! @paginate(defaultCount: 10)
+    categories: [Category!]! @all
     category(id: ID @eq): Category @find
 
     reviews: [Review!]! @paginate(defaultCount: 10)
@@ -18,6 +21,8 @@ type Query {
 
     users: [User!]! @paginate(defaultCount: 10)
     user(id: ID @eq): User @find
+
+    # search(address: String! @where(operator: "like")): [Business!]! @all
 }
 
 input CreateBusinessInput {

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Review;
 use App\Models\Category;
 use Hidehalo\Nanoid\Client;
+use Laravel\Scout\Searchable;
 use Hidehalo\Nanoid\GeneratorInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Business extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Searchable;
 
     protected $fillable = [
         '__id',
@@ -45,6 +46,20 @@ class Business extends Model
             $nanoid = $client->generateId($size = 21, $mode = Client::MODE_DYNAMIC);
             $model->__id = $nanoid;
         });
+    }
+
+    /**
+     * Get the indexable data array for the model.
+    *
+    * @return array
+    */
+    public function toSearchableArray() : array
+    {
+        return [
+            'address' => $this->address,
+            'city' => $this->city,
+            'category' => $this->category['category'],
+        ];
     }
     
     public function category(): BelongsTo
