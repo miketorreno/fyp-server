@@ -6,7 +6,8 @@ scalar DateTime
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 type Query {
-    businesses: [Business!]! @paginate(defaultCount: 10)
+    # businesses: [Business!]! @paginate(defaultCount: 10)
+    businesses: [Business!]! @all
     # business(id: ID @eq): Business @find
     business(__id: String @eq): Business @find
     # businessSearch(search: String @search): [Business!]! @paginate(defaultCount: 10)
@@ -16,8 +17,12 @@ type Query {
     categories: [Category!]! @all
     category(id: ID @eq): Category @find
 
-    reviews: [Review!]! @paginate(defaultCount: 10)
+    # reviews: [Review!]! @paginate(defaultCount: 10)
+    reviews: [Review!]! @all
     review(id: ID @eq): Review @find
+
+    votes: [Vote!]! @all
+    vote(id: ID @eq): Vote @find
 
     users: [User!]! @paginate(defaultCount: 10)
     user(id: ID @eq): User @find
@@ -114,6 +119,12 @@ type Mutation {
     ): Review @update
     deleteReview(id: ID!): Review @delete
 
+    # REVIEWS VOTES
+    # checkVote(review_id: Int!, user_id: Int!): Vote! @create
+    createVote(review_id: Int!, user_id: Int!, val: Int!): Vote! @create
+    # upsertVote(review_id: Int!, user_id: Int!, val: Int!): Vote! @upsert
+    deleteVote(id: ID!): Vote @delete
+
     # USERS
     createUser(
         __id: String
@@ -157,6 +168,9 @@ type Business {
     deleted_at: DateTime
     category: Category! @belongsTo
     reviews: [Review!]! @hasMany
+    reviewCount: Int! @count(relation: "reviews")
+    ratingAvg: Float!
+        @aggregate(relation: "reviews", column: "rating", function: AVG)
 }
 
 type Category {
@@ -183,6 +197,7 @@ type Review {
     deleted_at: DateTime
     business: Business! @belongsTo
     user: User! @belongsTo
+    voteCount: Int! @count(relation: "votes")
 }
 
 type User {
@@ -194,4 +209,16 @@ type User {
     created_at: DateTime
     updated_at: DateTime
     deleted_at: DateTime
+}
+
+type Vote {
+    id: ID!
+    review_id: Int!
+    user_id: Int!
+    val: Int!
+    created_at: DateTime
+    updated_at: DateTime
+    deleted_at: DateTime
+    review: Review! @belongsTo
+    user: User! @belongsTo
 }
