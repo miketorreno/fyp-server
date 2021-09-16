@@ -26,6 +26,10 @@ class Review extends Model
         'edited',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:j M Y'
+    ];
+
     protected static function boot()
     {
         parent::boot();
@@ -34,7 +38,6 @@ class Review extends Model
             $nanoid = $client->generateId($size = 21, $mode = Client::MODE_DYNAMIC);
             $model->__id = $nanoid;
         });
-
         
         Review::updating(function ($model) {
             $model->edited = 1;
