@@ -6,6 +6,8 @@ scalar DateTime
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 type Query {
+    # USERS
+
     # businesses: [Business!]! @paginate(defaultCount: 10)
     businesses: [Business!]! @all
     # business(id: ID @eq): Business @find
@@ -29,6 +31,10 @@ type Query {
     user(__id: String @eq): User @find
 
     # search(address: String! @where(operator: "like")): [Business!]! @all
+
+    # BUSINESS OWNERS
+    search(search: String @search): [Business!]! @all
+    my_businesses(__id: String @eq): User @find
 }
 
 input CreateBusinessInput {
@@ -167,6 +173,7 @@ type Business {
     created_at: DateTime
     updated_at: DateTime
     deleted_at: DateTime
+    user: User! @belongsTo
     category: Category! @belongsTo
     reviews: [Review!]! @hasMany
     reviewCount: Int! @count(relation: "reviews")
@@ -215,6 +222,7 @@ type User {
     updated_at: DateTime
     deleted_at: DateTime
     reviews: [Review!]! @hasMany
+    businesses: [Business!]! @hasMany
 }
 
 type Vote {

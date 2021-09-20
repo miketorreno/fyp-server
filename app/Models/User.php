@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Review;
+use App\Models\Business;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -49,5 +50,10 @@ class User extends Authenticatable
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function businesses(): HasMany
+    {
+        return $this->hasMany(Business::class);
     }
 }

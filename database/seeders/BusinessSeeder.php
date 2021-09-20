@@ -18,6 +18,7 @@ class BusinessSeeder extends Seeder
     {
         DB::table('businesses')->insert([
             '__id' => $this->getNanoId(),
+            'user_id' => 1,
             'category_id' => 11,
             'business_name' => "Pyramid Hotels and Resorts",
             'address' => "A1, Bishoftu, Ethiopia",
@@ -32,6 +33,7 @@ class BusinessSeeder extends Seeder
         ]);
         DB::table('businesses')->insert([
             '__id' => $this->getNanoId(),
+            'user_id' => 1,
             'category_id' => 9,
             'business_name' => "Genet Pharmacy",
             'address' => "PXXM+PVC, Bishoftu, Ethiopia",
@@ -46,6 +48,7 @@ class BusinessSeeder extends Seeder
         ]);
         DB::table('businesses')->insert([
             '__id' => $this->getNanoId(),
+            'user_id' => 2,
             'category_id' => 9,
             'business_name' => "Bishoftu Hospital",
             'address' => "QX2J+9X9, Bishoftu, Ethiopia",
@@ -74,6 +77,7 @@ class BusinessSeeder extends Seeder
         ]);
         DB::table('businesses')->insert([
             '__id' => $this->getNanoId(),
+            'user_id' => 3,
             'category_id' => 20,
             'business_name' => "Debre Zeit Mekane Yesus Chruch",
             'address' => "QX3Q+43 Bishoftu, Ethiopia",

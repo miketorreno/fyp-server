@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Review;
 use App\Models\Category;
 use Hidehalo\Nanoid\Client;
@@ -19,6 +20,8 @@ class Business extends Model
 
     protected $fillable = [
         '__id',
+        'user_id',
+        'category_id',
         'business_name',
         'address',
         'city',
@@ -55,11 +58,18 @@ class Business extends Model
     */
     public function toSearchableArray() : array
     {
-        return [
+        $array = $this->toArray();
+
+        $array['category'] = $this->category['category'];
+
+        return $array;
+        /* return [
+            'id' => $this->id,
+            'business_name' => $this->business_name,
             'address' => $this->address,
             'city' => $this->city,
             'category' => $this->category['category'],
-        ];
+        ]; */
     }
     
     public function category(): BelongsTo
@@ -70,5 +80,10 @@ class Business extends Model
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
+    }
+    
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
