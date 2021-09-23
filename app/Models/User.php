@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Photo;
 use App\Models\Review;
 use App\Models\Business;
 use Illuminate\Notifications\Notifiable;
@@ -55,5 +56,10 @@ class User extends Authenticatable
     public function businesses(): HasMany
     {
         return $this->hasMany(Business::class);
+    }
+
+    public function photos(): HasMany
+    {
+        return $this->hasMany(Photo::class);
     }
 }

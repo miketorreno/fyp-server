@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Photo;
 use App\Models\Review;
 use App\Models\Category;
 use Hidehalo\Nanoid\Client;
@@ -72,6 +73,11 @@ class Business extends Model
         ]; */
     }
     
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -81,9 +87,9 @@ class Business extends Model
     {
         return $this->hasMany(Review::class);
     }
-    
-    public function user(): BelongsTo
+
+    public function photos(): HasMany
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Photo::class);
     }
 }

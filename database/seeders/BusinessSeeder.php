@@ -28,6 +28,7 @@ class BusinessSeeder extends Seeder
             'latitude' => 8.7467948,
             'longitude' => 38.9844556,
             'location' => "Bishoftu",
+            'claimed' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
@@ -43,6 +44,7 @@ class BusinessSeeder extends Seeder
             'latitude' => 8.7494952,
             'longitude' => 38.9846166,
             'location' => "Bishoftu",
+            'claimed' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
@@ -58,6 +60,7 @@ class BusinessSeeder extends Seeder
             'latitude' => 8.7511470,
             'longitude' => 38.9824764,
             'location' => "Bishoftu",
+            'claimed' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
@@ -87,6 +90,7 @@ class BusinessSeeder extends Seeder
             'latitude' => 8.7527574,
             'longitude' => 38.9877264,
             'location' => "Bishoftu",
+            'claimed' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);

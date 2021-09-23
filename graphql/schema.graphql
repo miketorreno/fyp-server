@@ -5,6 +5,9 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 scalar DateTime
     @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
+scalar Upload
+    @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
+
 type Query {
     # USERS
 
@@ -14,6 +17,7 @@ type Query {
     business(__id: String @eq): Business @find
     # businessSearch(search: String @search): [Business!]! @paginate(defaultCount: 10)
     businessSearch(search: String @search): [Business!]! @all
+    photos: [Photo!]! @all
 
     # categories: [Category!]! @paginate(defaultCount: 10)
     categories: [Category!]! @all
@@ -78,15 +82,14 @@ type Mutation {
     # createBusiness(input: CreateBusinessInput! @spread): Business! @create
     updateBusiness(
         id: ID!
-        __id: String
         category_id: Int
-        business_name: String
-        address: String
-        city: String
+        business_name: String!
+        address: String!
+        city: String!
         state: String
         postal_code: String
-        latitude: Float
-        longitude: Float
+        latitude: Float!
+        longitude: Float!
         location: String
         geohash: String
         telephone_number: String
@@ -148,6 +151,9 @@ type Mutation {
         bio: String
     ): User @update
     deleteUser(id: ID!): User @delete
+
+    # UPLOADS
+    upload(photo: Upload!): String
 }
 
 type Business {
@@ -173,9 +179,10 @@ type Business {
     created_at: DateTime
     updated_at: DateTime
     deleted_at: DateTime
-    user: User! @belongsTo
+    user: User @belongsTo
     category: Category! @belongsTo
-    reviews: [Review!]! @hasMany
+    reviews: [Review] @hasMany
+    photos: [Photo] @hasMany
     reviewCount: Int! @count(relation: "reviews")
     ratingAvg: Float!
         @aggregate(relation: "reviews", column: "rating", function: AVG)
@@ -190,6 +197,17 @@ type Category {
     updated_at: DateTime
     deleted_at: DateTime
     businesses: [Business!]! @hasMany
+}
+
+type Photo {
+    id: ID!
+    __id: String!
+    business_id: Int!
+    user_id: Int!
+    url: String
+    caption: String
+    business: Business! @belongsTo
+    user: User @belongsTo
 }
 
 type Review {
@@ -221,8 +239,9 @@ type User {
     created_at: DateTime
     updated_at: DateTime
     deleted_at: DateTime
-    reviews: [Review!]! @hasMany
-    businesses: [Business!]! @hasMany
+    reviews: [Review] @hasMany
+    photos: [Photo] @hasMany
+    businesses: [Business] @hasMany
 }
 
 type Vote {
