@@ -8,6 +8,7 @@ use App\Models\Review;
 use App\Models\Category;
 use Hidehalo\Nanoid\Client;
 use Laravel\Scout\Searchable;
+use App\Models\BusinessVerification;
 use Hidehalo\Nanoid\GeneratorInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -91,5 +92,10 @@ class Business extends Model
     public function photos(): HasMany
     {
         return $this->hasMany(Photo::class);
+    }
+
+    public function business_verifications(): HasMany
+    {
+        return $this->hasMany(BusinessVerification::class);
     }
 }
