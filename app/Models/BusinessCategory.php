@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model
+class BusinessCategory extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -23,7 +23,7 @@ class Category extends Model
     protected static function boot()
     {
         parent::boot();
-        Category::creating(function ($model) {
+        BusinessCategory::creating(function ($model) {
             $client = new Client();
             $nanoid = $client->generateId($size = 21, $mode = Client::MODE_DYNAMIC);
             $model->__id = $nanoid;

@@ -19,7 +19,7 @@ class ReviewSeeder extends Seeder
         DB::table('reviews')->insert([
             '__id' => $this->getNanoId(),
             'business_id' => 1,
-            'user_id' => 1,
+            'user_id' => 4,
             'rating' => 3,
             'review' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
             'created_at' => date('Y-m-d H:i:s'),
@@ -46,7 +46,7 @@ class ReviewSeeder extends Seeder
         DB::table('reviews')->insert([
             '__id' => $this->getNanoId(),
             'business_id' => 2,
-            'user_id' => 1,
+            'user_id' => 4,
             'rating' => 3,
             'review' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
             'created_at' => date('Y-m-d H:i:s'),
@@ -91,7 +91,7 @@ class ReviewSeeder extends Seeder
         DB::table('reviews')->insert([
             '__id' => $this->getNanoId(),
             'business_id' => 4,
-            'user_id' => 1,
+            'user_id' => 4,
             'rating' => 2,
             'review' => "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
             'created_at' => date('Y-m-d H:i:s'),
@@ -118,7 +118,7 @@ class ReviewSeeder extends Seeder
         DB::table('reviews')->insert([
             '__id' => $this->getNanoId(),
             'business_id' => 5,
-            'user_id' => 1,
+            'user_id' => 4,
             'rating' => 5,
             'review' => "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
             'created_at' => date('Y-m-d H:i:s'),

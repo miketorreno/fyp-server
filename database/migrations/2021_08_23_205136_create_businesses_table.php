@@ -17,7 +17,7 @@ class CreateBusinessesTable extends Migration
             $table->id();
             $table->string('__id', 50)->unique();
             $table->foreignId('user_id')->nullable()->constrained();
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('business_category_id')->constrained();
             $table->string('business_name', 100);
             $table->string('address', 150);
             $table->string('city', 100);

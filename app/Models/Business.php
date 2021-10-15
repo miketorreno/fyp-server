@@ -5,9 +5,10 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Photo;
 use App\Models\Review;
-use App\Models\Category;
 use Hidehalo\Nanoid\Client;
 use Laravel\Scout\Searchable;
+// use App\Models\Category;▬
+use App\Models\BusinessCategory;
 use App\Models\BusinessVerification;
 use Hidehalo\Nanoid\GeneratorInterface;
 use Illuminate\Database\Eloquent\Model;
@@ -23,7 +24,7 @@ class Business extends Model
     protected $fillable = [
         '__id',
         'user_id',
-        'category_id',
+        'business_category_id',
         'business_name',
         'address',
         'city',
@@ -62,7 +63,7 @@ class Business extends Model
     {
         $array = $this->toArray();
 
-        $array['category'] = $this->category['category'];
+        $array['category'] = $this->business_category['category'];
 
         return $array;
         /* return [
@@ -70,7 +71,7 @@ class Business extends Model
             'business_name' => $this->business_name,
             'address' => $this->address,
             'city' => $this->city,
-            'category' => $this->category['category'],
+            'category' => $this->business_category['category'],
         ]; */
     }
     
@@ -79,9 +80,9 @@ class Business extends Model
         return $this->belongsTo(User::class);
     }
     
-    public function category(): BelongsTo
+    public function business_category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(BusinessCategory::class);
     }
 
     public function reviews(): HasMany

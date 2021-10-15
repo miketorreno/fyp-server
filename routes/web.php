@@ -19,3 +19,8 @@ Route::get('/', function () {
 });
 
 Route::post('/upload', [PhotoController::class, 'upload'])->name('upload');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

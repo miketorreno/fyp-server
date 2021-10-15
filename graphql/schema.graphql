@@ -19,9 +19,9 @@ type Query {
     businessSearch(search: String @search): [Business!]! @all
     photos: [Photo!]! @all
 
-    # categories: [Category!]! @paginate(defaultCount: 10)
-    categories: [Category!]! @all
-    category(id: ID @eq): Category @find
+    # categories: [BusinessCategory!]! @paginate(defaultCount: 10)
+    categories: [BusinessCategory!]! @all
+    category(id: ID @eq): BusinessCategory @find
 
     # reviews: [Review!]! @paginate(defaultCount: 10)
     reviews: [Review!]! @all
@@ -97,15 +97,18 @@ type Mutation {
     deleteBusinessVerification(id: ID!): BusinessVerification @delete
 
     # CATEGORIES
-    createCategory(parent_id: Int, __id: String, category: String!): Category!
-        @create
+    createCategory(
+        parent_id: Int
+        __id: String
+        category: String!
+    ): BusinessCategory! @create
     updateCategory(
         id: ID!
         parent_id: Int
         __id: String
         category: String
-    ): Category @update
-    deleteCategory(id: ID!): Category @delete
+    ): BusinessCategory @update
+    deleteCategory(id: ID!): BusinessCategory @delete
 
     # REVIEWS
     createReview(
@@ -176,7 +179,7 @@ type Business {
     updated_at: DateTime
     deleted_at: DateTime
     user: User @belongsTo
-    category: Category! @belongsTo
+    business_category: BusinessCategory! @belongsTo
     reviews: [Review] @hasMany
     photos: [Photo] @hasMany
     reviewCount: Int! @count(relation: "reviews")
@@ -192,7 +195,7 @@ type BusinessVerification {
     business: Business! @belongsTo
 }
 
-type Category {
+type BusinessCategory {
     id: ID!
     parent_id: Int
     __id: String!
