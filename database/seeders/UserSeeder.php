@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             '__id' => $this->getNanoId(),
             'name' => 'Mike',
             'avatar' => 'http://localhost:8000/storage/profile/user.jpg',
+            'phone' => '+251987654321',
             'email' => 'mike@gmail.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -32,6 +33,7 @@ class UserSeeder extends Seeder
             '__id' => $this->getNanoId(),
             'name' => 'SeMo',
             'avatar' => 'http://localhost:8000/storage/profile/user.jpg',
+            'phone' => '+251987654321',
             'email' => 'semo@gmail.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -43,6 +45,7 @@ class UserSeeder extends Seeder
             '__id' => $this->getNanoId(),
             'name' => 'Micheal',
             'avatar' => 'http://localhost:8000/storage/profile/user.jpg',
+            'phone' => '+251987654321',
             'email' => 'micheal@gmail.com',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

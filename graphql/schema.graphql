@@ -15,8 +15,9 @@ type Query {
     businesses: [Business!]! @all
     # business(id: ID @eq): Business @find
     business(__id: String @eq): Business @find
-    # businessSearch(search: String @search): [Business!]! @paginate(defaultCount: 10)
-    businessSearch(search: String @search): [Business!]! @all
+    businessSearch(search: String @search): [Business!]!
+        @paginate(defaultCount: 30)
+    # businessSearch(search: String @search): [Business!]! @all
     photos: [Photo!]! @all
 
     # categories: [BusinessCategory!]! @paginate(defaultCount: 10)
@@ -37,7 +38,8 @@ type Query {
     # search(address: String! @where(operator: "like")): [Business!]! @all
 
     # BUSINESS OWNERS
-    search(search: String @search): [Business!]! @all
+    search(search: String @search): [Business!]! @paginate(defaultCount: 30)
+    # search(search: String @search): [Business!]! @all
     my_businesses(__id: String @eq): User @find
     businessVerifications: [BusinessVerification!]! @all
     verifyBusiness(
@@ -49,7 +51,7 @@ type Mutation {
     # BUSINESSES
     createBusiness(
         __id: String
-        category_id: Int!
+        business_category_id: Int!
         business_name: String!
         address: String!
         city: String!
@@ -68,7 +70,7 @@ type Mutation {
     # createBusiness(input: CreateBusinessInput! @spread): Business! @create
     updateBusiness(
         id: ID!
-        category_id: Int
+        business_category_id: Int
         business_name: String!
         address: String!
         city: String!

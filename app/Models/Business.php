@@ -22,6 +22,7 @@ class Business extends Model
     use HasFactory, SoftDeletes, Searchable;
 
     protected $fillable = [
+        'id',
         '__id',
         'user_id',
         'business_category_id',
@@ -61,18 +62,18 @@ class Business extends Model
     */
     public function toSearchableArray() : array
     {
-        $array = $this->toArray();
+        // $array = $this->toArray();
 
-        $array['category'] = $this->business_category['category'];
+        // $array['category'] = $this->business_category['category'];
 
-        return $array;
-        /* return [
+        // return $array;
+        return [
             'id' => $this->id,
             'business_name' => $this->business_name,
             'address' => $this->address,
             'city' => $this->city,
             'category' => $this->business_category['category'],
-        ]; */
+        ];
     }
     
     public function user(): BelongsTo
